@@ -4,22 +4,50 @@ import Sidebar from "./Sidebar";
 import { Outlet } from "react-router-dom";
 
 export default function Layout() {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(window.innerWidth >= 1024);
 
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
 
   return (
-    <div className="flex h-screen">
-      {/* Sidebar */}
-      <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
+    <div className="bg-gray-100"> {/* Ya no es un contenedor flex */}
+      <Sidebar
+        isOpen={isSidebarOpen}
+        onClose={() => setIsSidebarOpen(false)}
+      />
 
-      {/* Contenedor principal */}
-      <div className="flex flex-col flex-1 transition-all duration-300">
+      {/* Este div ahora usa 'padding' para hacer espacio al sidebar */}
+      <div
+        className={`transition-all duration-300 ease-in-out
+        ${isSidebarOpen ? "lg:pl-64" : "lg:pl-0"}
+        `}
+      >
         <Navbar onToggleSidebar={toggleSidebar} />
-        <main className="p-6 bg-gray-100 flex-1 overflow-y-auto">
+        <main className="p-6 min-h-screen">
           <Outlet />
         </main>
       </div>
     </div>
   );
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
