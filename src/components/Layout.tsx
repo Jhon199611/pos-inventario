@@ -9,20 +9,20 @@ export default function Layout() {
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
 
   return (
-    <div className="bg-gray-100"> {/* Ya no es un contenedor flex */}
+    <div className="relative min-h-screen bg-gray-100">
       <Sidebar
         isOpen={isSidebarOpen}
         onClose={() => setIsSidebarOpen(false)}
       />
 
-      {/* Este div ahora usa 'padding' para hacer espacio al sidebar */}
+      {/* Este div empuja el contenido principal para hacer espacio al sidebar */}
       <div
         className={`transition-all duration-300 ease-in-out
         ${isSidebarOpen ? "lg:pl-64" : "lg:pl-0"}
         `}
       >
         <Navbar onToggleSidebar={toggleSidebar} />
-        <main className="p-6 min-h-screen">
+        <main className="p-6">
           <Outlet />
         </main>
       </div>

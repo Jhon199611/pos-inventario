@@ -1,5 +1,5 @@
 import { Menu, LogOut } from 'lucide-react';
-import { useAuthStore } from '../store/useAuthStore'; // Asegúrate que la ruta sea correcta
+import { useAuthStore } from '../store/useAuthStore';
 
 interface NavbarProps {
   onToggleSidebar: () => void;
@@ -13,12 +13,13 @@ export default function Navbar({ onToggleSidebar }: NavbarProps) {
   };
 
   return (
+    // Ya no necesita z-index ni position relative
     <nav className="h-16 bg-gradient-to-r from-blue-900 via-blue-700 to-blue-600 shadow-md flex items-center justify-between px-6 text-white font-semibold">
-      {/* Botón hamburguesa */}
+      
+      {/* Volvemos a usar solo onClick, es la forma correcta */}
       <button
         className="p-2 rounded-md hover:bg-blue-800 transition"
         onClick={onToggleSidebar}
-        onTouchEnd={onToggleSidebar} // <- Añadido para mejorar respuesta táctil
       >
         <Menu size={28} />
       </button>
@@ -32,8 +33,7 @@ export default function Navbar({ onToggleSidebar }: NavbarProps) {
 
         <button
           onClick={handleLogout}
-          onTouchEnd={handleLogout} // ✅ LA SOLUCIÓN PRINCIPAL ESTÁ AQUÍ
-          className="flex items-center gap-2 bg-transparent border border-white/50 text-white/90 px-3 py-1 rounded-lg hover:bg-white/10 active:bg-white/20 transition-colors"
+          className="flex items-center gap-2 bg-transparent border border-white/50 text-white/90 px-3 py-1 rounded-lg hover:bg-white/10 transition-colors"
           title="Cerrar sesión"
         >
           <LogOut size={16} />

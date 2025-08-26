@@ -10,9 +10,9 @@ interface SidebarProps {
 export default function Sidebar({ isOpen, onClose }: SidebarProps) {
   return (
     <>
-      {/* El Sidebar ahora siempre es 'fixed' y su visibilidad la controla 'transform' */}
+      {/* Lógica simplificada: siempre 'fixed', se esconde con 'transform' */}
       <aside
-        className={`fixed top-0 left-0 h-full w-64 bg-gradient-to-b from-blue-950 via-blue-900 to-blue-800 text-white shadow-lg border-r border-blue-700/30 transition-transform duration-300 ease-in-out z-40
+        className={`fixed top-0 left-0 h-full w-64 bg-gradient-to-b from-blue-950 via-blue-900 to-blue-800 text-white shadow-lg transition-transform duration-300 ease-in-out z-40
         ${isOpen ? "translate-x-0" : "-translate-x-full"}
         `}
       >
@@ -43,13 +43,13 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
         </ul>
       </aside>
 
-      {/* Overlay móvil */}
-      {isOpen && (
-        <div
-          className="fixed inset-0 bg-black/50 z-30 lg:hidden"
-          onClick={onClose}
-        />
-      )}
+      {/* Overlay móvil: solo aparece si el sidebar está abierto en pantallas pequeñas */}
+      <div
+        className={`fixed inset-0 bg-black/50 z-30 lg:hidden ${
+          isOpen ? "block" : "hidden"
+        }`}
+        onClick={onClose}
+      />
     </>
   );
 }
