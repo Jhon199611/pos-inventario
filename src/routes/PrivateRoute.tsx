@@ -1,5 +1,5 @@
-import { Navigate } from "react-router-dom";
 import { useAuthStore } from "../store/useAuthStore";
+import { Navigate } from "react-router-dom";
 import type { ReactNode } from "react";
 
 interface Props {
@@ -7,9 +7,14 @@ interface Props {
 }
 
 export const PrivateRoute = ({ children }: Props) => {
-  const user = useAuthStore((state) => state.user);
+  const status = useAuthStore((state) => state.status);
 
-  if (!user) return <Navigate to="/login" replace />;
-  return <>{children}</>; // envuelto en fragmento
+  // Si está autenticado, permite el acceso. Si no, Navigate lo manejará en el AppRouter.
+  if (status === 'authenticated') {
+    return <>{children}</>;
+  }
+
+  // Teóricamente, el AppRouter ya previene llegar aquí, pero es una buena salvaguarda.
+  return <Navigate to="/login" replace />;
 };
 
