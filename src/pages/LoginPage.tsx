@@ -8,6 +8,8 @@ export default function LoginPage() {
         <p className="text-slate-600 mt-2">Inicia sesión para administrar tu negocio</p>
       </div>
       <LoginForm />
+      <h1>USUARIO: jhon199611@gmail.com</h1>
+      <h1>CONTRASEÑA: 12345678</h1>
     </div>
   );
 }
